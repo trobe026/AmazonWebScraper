@@ -23,12 +23,14 @@ module.exports = {
         // }
         for (var i = 0; i < links.value.length; i++) {
           ids.push(links.value[i].ELEMENT);
+          ids.forEach(function(link, j) {
+            client.pause(3000)
+            .elementIdClick(link, function() {
+              client.back()
+            })
+          })
         }
-        ids.forEach(function(link, j) {
-          client.pause(3000)
-          .elementIdClick(link)
-          .back()
-        })
+
         // for (let j = 0; j < 5; j++) {
         // (function(cntr) {
         //   client.elementIdClick(ids[j], function() {
