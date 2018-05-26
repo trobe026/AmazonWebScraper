@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="0"
+            tests="1">
+
+  <testsuite name="amazonBookSearch"
+    errors="1" failures="0" hostname="" id="" package="amazonBookSearch" skipped="0"
+    tests="1" time="0.01000" timestamp="Sat, 26 May 2018 05:14:12 GMT">
+  
+    <testcase name="Amazon Book Scraper" classname="amazonBookSearch" time="0.01000" assertions="0">
+    </testcase>
+  
+
+  
+    <system-err>
+        Error while running [Amazon Book Search / Amazon Book Scraper]:
+
+  ReferenceError: element is not defined
+    at Object.Amazon Book Scraper (/Users/troberts/Desktop/webcrawler/test/e2e/amazonBookSearch.js:14:33)
+    at Module.call (/Users/troberts/Desktop/webcrawler/node_modules/nightwatch/lib/runner/module.js:62:34)
+    at /Users/troberts/Desktop/webcrawler/node_modules/nightwatch/lib/runner/testcase.js:70:29
+    at _fulfilled (/Users/troberts/Desktop/webcrawler/node_modules/q/q.js:834:54)
+    at self.promiseDispatch.done (/Users/troberts/Desktop/webcrawler/node_modules/q/q.js:863:30)
+    at Promise.promise.promiseDispatch (/Users/troberts/Desktop/webcrawler/node_modules/q/q.js:796:13)
+    at /Users/troberts/Desktop/webcrawler/node_modules/q/q.js:556:49
+    at runSingle (/Users/troberts/Desktop/webcrawler/node_modules/q/q.js:137:13)
+    at flush (/Users/troberts/Desktop/webcrawler/node_modules/q/q.js:125:13)
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    </system-err>
+  
+
+  
+  </testsuite>
+</testsuites>

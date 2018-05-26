@@ -1,0 +1,23 @@
+{
+  "name": "Amazonwebscraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "nightwatch": "^0.9.21",
+    "selenium-download": "^2.0.12"
+  },
+  "dependencies": {
+    "chromedriver": "^2.33.2",
+    "env2": "^2.1.1",
+    "mime-types": "^2.1.13",
+    "nodemon": "^1.17.5",
+    "selenium-server": "^3.8.1"
+  }
+}
