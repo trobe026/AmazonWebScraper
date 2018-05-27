@@ -5,15 +5,15 @@
 
   <testsuite name="poe"
     errors="0" failures="0" hostname="" id="" package="poe" skipped="0"
-    tests="0" time="0.000" timestamp="Sat, 26 May 2018 05:14:12 GMT">
+    tests="0" time="0.000" timestamp="Sat, 26 May 2018 22:05:44 GMT">
   
 
   
     <system-err>
         Error while running [Amazon Book Search / Amazon Book Scraper]:
 
-  ReferenceError: element is not defined
-    at Object.Amazon Book Scraper (/Users/troberts/Desktop/webcrawler/test/e2e/amazonBookSearch.js:14:33)
+  TypeError: Cannot read property &#39;end&#39; of undefined
+    at Object.Amazon Book Scraper (/Users/troberts/Desktop/webcrawler/test/e2e/amazonBookSearch.js:40:7)
     at Module.call (/Users/troberts/Desktop/webcrawler/node_modules/nightwatch/lib/runner/module.js:62:34)
     at /Users/troberts/Desktop/webcrawler/node_modules/nightwatch/lib/runner/testcase.js:70:29
     at _fulfilled (/Users/troberts/Desktop/webcrawler/node_modules/q/q.js:834:54)
