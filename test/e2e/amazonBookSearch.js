@@ -32,14 +32,7 @@ module.exports = {
       })
   }
   'Amazon Book Scraper': function(client) {
-    var i = 0;
 
-    client
-      .elements('css selector', '.aok-align-center', function(links) {
-
-      function iterate(cb) {
-        cb();
-      }
         for (var i = 0; i < links.value.length) {
 
 
@@ -54,7 +47,7 @@ module.exports = {
         }
 
 
-      })
+
         // for (var i = 0; i < result1.value.length; i++) {
         //   client
         //     .elementIdClick(result1.value[i].ELEMENT, function(print) {
