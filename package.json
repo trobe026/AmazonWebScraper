@@ -16,6 +16,7 @@
   "dependencies": {
     "chromedriver": "^2.33.2",
     "env2": "^2.1.1",
+    "fs": "0.0.1-security",
     "mime-types": "^2.1.13",
     "nightmare-plus": "^2.5.1",
     "nodemon": "^1.17.5",

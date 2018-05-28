@@ -1,47 +1,87 @@
 var request = require("request");
 var cheerio = require("cheerio");
 var Nightmare = require('nightmare');
-var nightmare = Nightmare({ show: true })
+const { readFileSync, writeFileSync } = require('fs');
+var nightmare = Nightmare({ show: false })
+var links = [];
 const category = 'books';
 const startUrl = 'http://amazon.com';
 const pageIds = [
   '#twotabsearchtextbox',
   '.nav-input',
-  '.aok-align-center'
-]
+  '.acs_product-image'
+];
 
+nightmare
+  .goto(startUrl)
+  .wait(pageIds[0])
+  .type(pageIds[0], category)
+  .click(pageIds[1])
+  .wait(pageIds[2])
+  links = nightmare.evaluate(function() {
+  return Array.from(document.querySelectorAll('.acs_product-image')).map(a => a.href);
 
-const linkList = async id => {};
+})
+  .end()
+  .then(function(links) {
+    var limitLinks = links.slice(0, 2);
+    // console.log(limitLinks)
+    const series = limitLinks.reduce(async (queue, link) => {
+      const dataArray = await queue;
+      dataArray.push(await getProductInfo(link));
+      console.log(dataArray)
+      return dataArray;
+    }, Promise.resolve([]));
+
+    series.then(data => {
+      const json = JSON.stringify(data.filter(i => i));
+      writeFileSync('ScrapeResults.json', json, 'utf8')
+    })
+    .catch(error => console.log('Search failed:', error));
+  });
+
 
 const getProductInfo = async link => {
 
-  console.log(`Extracting ${category} info from ${link}`);
+  console.log(`Extracting "${category}" data from ${link}`);
   const nightmare = new Nightmare( { show: true });
 
+// Go to to Starting Url, navigate to 'books' page.
   try {
     await nightmare
       .goto(startUrl)
       .wait(pageIds[0])
       .type(pageIds[0], category)
-      .click(pageIds[1])
-      .
+      .click(pageIds[1]);
+  } catch(error) {
+    console.log(error);
   }
 
-}
+  // click on link to book being fed to function
+  try {
+    await nightmare
+    .wait(pageIds[2])
+    .goto(link)
+  } catch(error) {
+    console.log(error);
+  }
 
-nightmare
-  .goto('http://amazon.com')
-  .type('#twotabsearchtextbox', category)
-  .click()
-  .wait()
-  .end()
-  .then(function(result) {
-    console.log(result)
-    console.log('test')
-  })
-  .catch(function(error) {
-    console.error('Search failed:', error)
-  });
+  try {
+    const result = await nightmare
+      .wait('#productDetailsTable')
+      .evaluate(() => {
+        return [...document.querySelectorAll('#title')].map(el => el.innerText);
+      })
+      .end();
+      return { link, info: result[0], moreinfo:result[1]}
+  } catch(error) {
+    console.log('error');
+    return undefined;
+  }
+};
+
+
+
 
 // module.exports = function(app) {
 //   app.get('/scrape', function(req, res) {
