@@ -1,5 +1,6 @@
 var request = require("request");
 var cheerio = require("cheerio");
+const htmlparser2 = require('htmlparser2');
 var Nightmare = require('nightmare');
 const { readFileSync, writeFileSync } = require('fs');
 var nightmare = Nightmare({ show: false })
@@ -51,6 +52,7 @@ const getProductInfo = async (link, i) => {
 
   try {
     await nightmare
+    .cookies.clearAll()
     .goto(link)
   } catch(error) {
     console.log(error);
@@ -60,8 +62,10 @@ const getProductInfo = async (link, i) => {
     const result = await nightmare
       // .wait('body')
       // attempt to click paperback or hardback if not already selected - allows higher % of scraped data points
+      .click('a > #bdSeeAllPrompt')
       .click('#a-autoid-2-announce' || '#a-autoid-3-announce' || '#a-autoid-4-announce')
-      // .wait('body')
+      .wait('title')
+
       // .evaluate(() => {
       //   return [...document.querySelectorAll('#title')].map(el => el.innerText);
       // })
@@ -85,7 +89,8 @@ const getProductInfo = async (link, i) => {
         return document.body.innerHTML;
       })
       .end(function(body) {
-        var $ = cheerio.load(body)
+        var dom = htmlparser2.parseDOM(body);
+        var $ = cheerio.load(body);
         var results = {};
         $('#dp-container').each(function(i, element) {
           results.name = $(element).find('h1[id="title"]').find('span[class=a-size-large]' || 'span[class=a-size-extra-large]').text().trim();
@@ -94,20 +99,26 @@ const getProductInfo = async (link, i) => {
           if (results.price === "") {
             results.price = $(element).find('#buyNewSection > h5 > div > div.a-column.a-span8.a-text-right.a-span-last > div > span.a-size-medium.a-color-price.offer-price.a-text-normal').text();
           }
+          // Was unable to find src of iframe to scrape from on amazon
+          results.desc = $('#bookDesc_iframe').find('#iframeContent').text();
 
-          results.desc = $(element).find('#bookDesc_iframe > html > body > #iframeContent').text();
-          // results.desc = 'test';
+          results.dimen = $(element).find('#productDetailsTable > tbody > tr > td > div > ul > li:nth-child(7)').contents().filter(function() {
+            return this.nodeType == 3;
+          }).text().trim();
 
-          results.dimen = $(element).find('#productDetailsTable > tbody > tr > td > div > ul > li:nth-child(6)').text();
-          // results.dimen = 'test';
-
-          results.weight = $(element).find('#productDetailsTable > tbody > tr > td > div > ul > li:nth-child(7)').text();
-          // results.weight = 'test';
-
+          results.weight = $(element).find('#productDetailsTable > tbody > tr > td > div > ul > li:nth-child(8)').contents().filter(function() {
+            return this.nodeType == 3;
+          }).text().trim();
+          results.img = [];
+          $('.a-spacing-micro > img').each(function(i, element) {
+            results.img.push($(element).attr('src'));
+          })
           // var imgUrl = 'test'
           // results.img = imgUrl;
-
+// #productDetailsTable > tbody > tr > td > div > ul > li:nth-child(7) > b
         })
+
+
         return results;
       })
       return {
@@ -117,8 +128,8 @@ const getProductInfo = async (link, i) => {
           listPrice: result.price,
           description: result.desc,
           product_dimension: result.dimen,
-          // imageURLs: [],
-          // weight: result,
+          weight: result.weight,
+          imageURLs: result.img,
           sourceURL: link
         }
       };
