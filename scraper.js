@@ -2,6 +2,8 @@ var request = require("request");
 var cheerio = require("cheerio");
 const htmlparser2 = require('htmlparser2');
 var Nightmare = require('nightmare');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
 const { readFileSync, writeFileSync } = require('fs');
 var nightmare = Nightmare({ show: false })
 var links = [];
@@ -47,6 +49,8 @@ nightmare
 
 // Scrape requested data points
 const getProductInfo = async (link, i) => {
+// jsdom testing
+
   console.log(`Extracting "${category}" data from ${link}`);
   const nightmare = new Nightmare( { show: true });
 
@@ -60,36 +64,15 @@ const getProductInfo = async (link, i) => {
 
   try {
     const result = await nightmare
-      // .wait('body')
-      // attempt to click paperback or hardback if not already selected - allows higher % of scraped data points
+      // attempt to click paperback or hardback if not already selected - allows scraping of more data points
       .click('a > #bdSeeAllPrompt')
       .click('#a-autoid-2-announce' || '#a-autoid-3-announce' || '#a-autoid-4-announce')
       .wait('title')
-
-      // .evaluate(() => {
-      //   return [...document.querySelectorAll('#title')].map(el => el.innerText);
-      // })
-      // .end();
-      // console.log(result)
-      // return {
-      //   product: {
-      //     id: 1,
-      //     name: result,
-      //     listPrice: result,
-      //     description: result,
-      //     product_dimension: result,
-      //     imageURLs: [],
-      //     weight: result,
-      //     sourceURL: link
-      //   }
-      // }
-
-
       .evaluate(() => {
         return document.body.innerHTML;
       })
       .end(function(body) {
-        var dom = htmlparser2.parseDOM(body);
+        // console.log(body)
         var $ = cheerio.load(body);
         var results = {};
         $('#dp-container').each(function(i, element) {
@@ -100,24 +83,63 @@ const getProductInfo = async (link, i) => {
             results.price = $(element).find('#buyNewSection > h5 > div > div.a-column.a-span8.a-text-right.a-span-last > div > span.a-size-medium.a-color-price.offer-price.a-text-normal').text();
           }
           // Was unable to find src of iframe to scrape from on amazon
-          results.desc = $('#bookDesc_iframe').find('#iframeContent').text();
+          var desc = $(body).find('noscript').text().trim();
+          desc = /\t(.+)/.exec(desc)[1];
+          desc = desc.replace(/&.*?;|div|p|\//g, '');
+          results.desc = desc;
+          // results.desc = $('#iframeContent', top.window.frames[0].document)
+          const dom = new JSDOM(body, {
+            url: link,
+            referrer: link,
+            contentType: 'text/html',
+            resources: 'usable'
+          });
+          var x = dom.window.document.querySelector('#bookDesc_iframe').contentWindow;
+          console.log(x.document.getElementsByTagName("body").innerHTML)
+          // console.log(body)
+          $('#productDetailsTable > tbody > tr > td > div > ul > li').each(function() {
+            if ($(this).text().match(/Product/g)) {
+              results.dimen = $(this).contents().filter(function() {
+                return this.nodeType == 3;
+              }).text().trim();
+            }
+            if ($(this).text().match(/Shipping/g)) {
+              results.weight = $(this).contents().filter(function() {
+                return this.nodeType == 3;
+              }).text().trim();
+            }
+          })
 
-          results.dimen = $(element).find('#productDetailsTable > tbody > tr > td > div > ul > li:nth-child(7)').contents().filter(function() {
-            return this.nodeType == 3;
-          }).text().trim();
 
-          results.weight = $(element).find('#productDetailsTable > tbody > tr > td > div > ul > li:nth-child(8)').contents().filter(function() {
-            return this.nodeType == 3;
-          }).text().trim();
+          // $('#productDetailsTable > tbody > tr > td > div > ul > li').each(function(i, element) {
+          //   if (element:contains('Product Dimensions:') {
+          //     results.dimen = element.contents().filter(function() {
+          //       return this.nodeType == 3;
+          //   }).text().trim();
+          //   if (element:contains('Shipping Weight:') {
+          //     results.weight = element.contents().filter(function() {
+          //       return this.nodeType == 3;
+          //     }).text().trim();
+          //   })
+          // }))
+          // results.dimen = $(element).find('#productDetailsTable > tbody > tr > td > div > ul > li:nth-child(7)').contents().filter(function() {
+          //   return this.nodeType == 3;
+          // }).text().trim();
+          //
+          // results.weight = $(element).find('#productDetailsTable > tbody > tr > td > div > ul > li:nth-child(8)').contents().filter(function() {
+          //   return this.nodeType == 3;
+          // }).text().trim();
+
           results.img = [];
           $('.a-spacing-micro > img').each(function(i, element) {
             results.img.push($(element).attr('src'));
           })
+          results.img.push($('#main-image').attr('src'))
           // var imgUrl = 'test'
           // results.img = imgUrl;
 // #productDetailsTable > tbody > tr > td > div > ul > li:nth-child(7) > b
         })
-
+        // console.log(results.desc)
 
         return results;
       })
