@@ -1,7 +1,7 @@
 var cheerio = require("cheerio");
 const removeNull = require('../helpers/removeNull');
 
-const gatherData = body => {
+const extractProductData = body => {
   var $ = cheerio.load(body);
   var results = {};
   $('#dp-container').each(function(i, element) {
@@ -44,4 +44,4 @@ const gatherData = body => {
   return removeNull(results);
 }
 
-module.exports = gatherData;
+module.exports = extractProductData;

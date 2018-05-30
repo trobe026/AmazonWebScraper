@@ -1,8 +1,8 @@
-const scrapeProductData = require('./scrapeProductData')
+const product = require('./Product');
 const {writeFileSync} = require('fs');
 
-// 'handleLinks' generates an empty array which is added to as each 'scrapeProductData' operation completes. The results are then written locally to ScrapeResults.json.
-const handleLinks = links => {
+// 'processLinks' generates an empty array which is added to as each 'Product' operation completes. The results are then written locally to ScrapeResults.json.
+const processLinks = links => {
   console.log(`Found ${links.length} results.`)
 // Limiting results for testing purposes - can be removed to scrape from all found results.
   var limitLinks = links.slice(0, 3);
@@ -10,7 +10,7 @@ const handleLinks = links => {
   const series = limitLinks.reduce(async (queue, link, i) => {
     const dataArray = await queue;
 // each link is processed by 'scrapeProductData'
-    dataArray.push(await scrapeProductData(link, i));
+    dataArray.push(await product(link, i));
     return dataArray;
   }, Promise.resolve([]));
 
@@ -22,4 +22,4 @@ const handleLinks = links => {
   .catch(error => console.log('Search failed:', error));
 }
 
-module.exports = handleLinks;
+module.exports = processLinks;

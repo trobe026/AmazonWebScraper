@@ -4,6 +4,8 @@
   "pageIds": [
     "#twotabsearchtextbox",
     ".nav-input",
-    ".acs_product-image"
+    ".acs_product-image",
+    "#a-autoid-2-announce",
+    "title"
   ]
 }
