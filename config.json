@@ -1,6 +1,6 @@
 {
-  "category": "books",
   "startUrl": "http://amazon.com",
+  "category": "books",
   "pageIds": [
     "#twotabsearchtextbox",
     ".nav-input",

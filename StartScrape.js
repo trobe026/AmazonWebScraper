@@ -1,7 +1,6 @@
 var Nightmare = require('nightmare');
 const { writeFileSync } = require('fs');
 const processLinks = require('./scripts/ProcessLinks');
-
 // Custom Scraper Parameters
 const options = require('./config.json');
 

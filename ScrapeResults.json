@@ -1,51 +1,8 @@
 [
     {
         "product": {
-            "id": 1,
-            "name": "The Butterfly Garden (The Collector Series)",
-            "listPrice": "$6.99",
-            "description": " Near an isolated mansion lies a beautiful garden.In this garden grow luscious flowers, shady trees…and a collection of recious “butterflies”—young women who have been kidnaed and intricately tattooed to resemble their namesakes. Overseeing it all is the Gardener, a brutal, twisted man obsessed with caturing and reserving his lovely secimens.When the garden is discovered, a survivor is brought in for questioning. FBI agents Victor Hanoverian and Brandon Eddison are tasked with iecing together one of the most stomach-churning cases of their careers. But the girl, known only as Maya, roves to be a uzzle herself.As her story twists and turns, slowly shedding light on life in the Butterfly Garden, Maya reveals old grudges, new saviors, and horrific tales of a man who’d go to any length to hold beauty cative. But the more she shares, the more the agents have to wonder what she’s still hiding…",
-            "product_dimension": "5.5 x 1 x 8.2 inches",
-            "weight": "14.1 ounces ",
-            "imageURLs": [
-                "https://images-na.ssl-images-amazon.com/images/I/51m0xFUwk-L._AC_SX60_CR,0,0,60,60_.jpg",
-                "https://images-na.ssl-images-amazon.com/images/I/51LTbDBUgOL._AC_SX60_CR,0,0,60,60_.jpg",
-                "https://images-na.ssl-images-amazon.com/images/I/31pm8sUSnmL._AC_SX60_CR,0,0,60,60_.jpg",
-                null
-            ],
-            "sourceURL": "https://www.amazon.com/gp/product/B016ZNRC0Q/ref=s9_acsd_ri_bw_c_x_1_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-8&pf_rd_r=QR0P9CPSFGP8K1YB8PAZ&pf_rd_r=QR0P9CPSFGP8K1YB8PAZ&pf_rd_t=101&pf_rd_p=b8c0a303-a08e-4b0b-bd49-040811fd7080&pf_rd_p=b8c0a303-a08e-4b0b-bd49-040811fd7080&pf_rd_i=283155"
-        }
-    },
-    {
-        "product": {
-            "id": 2,
-            "name": "The Honest Spy",
-            "listPrice": "Data Point Unavailable for Product",
-            "description": " bDuring one of history's darkest chaters, one man is determined to make a difference.b  ",
-            "product_dimension": "Data Point Unavailable for Product",
-            "weight": "Data Point Unavailable for Product",
-            "imageURLs": [
-                "https://images-na.ssl-images-amazon.com/images/I/510ubCQvOsL._AA300_.jpg"
-            ],
-            "sourceURL": "https://www.amazon.com/gp/product/B076239WV5/ref=s9_acsd_ri_bw_c_x_2_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-8&pf_rd_r=QR0P9CPSFGP8K1YB8PAZ&pf_rd_r=QR0P9CPSFGP8K1YB8PAZ&pf_rd_t=101&pf_rd_p=b8c0a303-a08e-4b0b-bd49-040811fd7080&pf_rd_p=b8c0a303-a08e-4b0b-bd49-040811fd7080&pf_rd_i=283155"
-        }
-    },
-    {
-        "product": {
             "id": 3,
-            "name": "The 7 Habits of Highly Effective People: Powerful Lessons in Personal Change",
-            "listPrice": "$11.99",
-            "description": " BThis twenty-fifth anniversary edition of Stehen Covey#8217;s cherished classic commemorates the timeless wisdom of the 7 Habits.BBRBROne of the most insiring and imactful books ever written, I The 7 Habits of Highly Effective PeoleI has cativated readers for 25 years. It has transformed the lives of Presidents and CEOs, educators and arents#8212; in short, millions of eole of all ages and occuations.",
-            "product_dimension": "5.5 x 1 x 8.4 inches",
-            "weight": "1.7 pounds ",
-            "imageURLs": [
-                "https://images-na.ssl-images-amazon.com/images/I/51S1IFlzLcL._AC_SX60_CR,0,0,60,60_.jpg",
-                "https://images-na.ssl-images-amazon.com/images/I/51aujYGt5%2BL._AC_SX60_CR,0,0,60,60_.jpg",
-                "https://images-na.ssl-images-amazon.com/images/I/311ItSja-nL._AC_SX60_CR,0,0,60,60_.jpg",
-                "https://images-na.ssl-images-amazon.com/images/I/31zuRcLYh6L._AC_SX60_CR,0,0,60,60_.jpg",
-                null
-            ],
-            "sourceURL": "https://www.amazon.com/gp/product/B01069X4H0/ref=s9_acsd_ri_bw_c_x_3_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-8&pf_rd_r=QR0P9CPSFGP8K1YB8PAZ&pf_rd_r=QR0P9CPSFGP8K1YB8PAZ&pf_rd_t=101&pf_rd_p=b8c0a303-a08e-4b0b-bd49-040811fd7080&pf_rd_p=b8c0a303-a08e-4b0b-bd49-040811fd7080&pf_rd_i=283155"
+            "sourceURL": "https://www.amazon.com/gp/product/B00EB4ADQW/ref=s9_acsd_ri_bw_c_x_3_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-9&pf_rd_r=5FNAE845KP4PZMRDZ3V0&pf_rd_r=5FNAE845KP4PZMRDZ3V0&pf_rd_t=101&pf_rd_p=aa6671ed-30da-47a9-b3fb-6ead207e438f&pf_rd_p=aa6671ed-30da-47a9-b3fb-6ead207e438f&pf_rd_i=172282"
         }
     }
 ]

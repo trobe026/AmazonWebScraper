@@ -27,8 +27,8 @@ const nightmare = new Nightmare( { show: true });
           listPrice: result.price,
           description: result.desc,
           product_dimension: result.dimen,
-          weight: result.weight,
           imageURLs: result.img,
+          weight: result.weight,
           sourceURL: link
         }
       };

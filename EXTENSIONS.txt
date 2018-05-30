@@ -1,0 +1,6 @@
+1. Domains beyond Amazon.com
+  By altering config.json the scraper is able to navigate to any website, gather a list of product links, then iterate through those links scraping specified data points from each one.  This does require manually identifying selectors to be used in scraping.
+
+2. Products beyond just simply books.
+  The app can navigate to any specified "category" and create a list of all contained product links. In order to pull valid data from each product page, the selectors in "ExtractProductData" must match those on the page for requested data points.
+  
