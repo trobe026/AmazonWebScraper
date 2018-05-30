@@ -7,5 +7,6 @@
     ".acs_product-image",
     "#a-autoid-2-announce",
     "title"
-  ]
+  ],
+  "resultLimit": 10
 }

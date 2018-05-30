@@ -1,11 +1,12 @@
 const product = require('./Product');
 const {writeFileSync} = require('fs');
+const options = require('../config');
 
 // 'processLinks' generates an empty array which is added to as each 'Product' operation completes. The results are then written locally to ScrapeResults.json.
 const processLinks = links => {
   console.log(`Found ${links.length} results.`)
-// Limiting results for testing purposes - can be removed to scrape from all found results.
-  var limitLinks = links.slice(0, 3);
+// Limiting results to 10 for testing purposes - can be changed in config.json
+  var limitLinks = links.slice(0, options.resultLimit);
 
   const series = limitLinks.reduce(async (queue, link, i) => {
     const dataArray = await queue;

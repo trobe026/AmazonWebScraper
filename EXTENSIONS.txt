@@ -1,6 +1,20 @@
-1. Domains beyond Amazon.com
-  By altering config.json the scraper is able to navigate to any website, gather a list of product links, then iterate through those links scraping specified data points from each one.  This does require manually identifying selectors to be used in scraping.
+1. Domains beyond Amazon.com:
 
-2. Products beyond just simply books.
-  The app can navigate to any specified "category" and create a list of all contained product links. In order to pull valid data from each product page, the selectors in "ExtractProductData" must match those on the page for requested data points.
-  
+  By altering config.json the scraper is able to navigate to any website, gather and create a list of product links, then iterate through those links scraping specified data points from each one.
+
+  This does require manually identifying selectors to be used in scraping and site navigation.
+
+  The "StartUrl" would need to be updated with the new website's url, and new selectors would need to be identified to navigate to the product listing page and create the array of product links - all of which can be updated in config.json.
+
+  "ExtractProductData.js" would need to be modified to get requested data points for the new product by locating their corresponding selectors and assigning them to different keys in the "results" object.
+
+  "Product.js" returns the Product object created by "ExtractProductData.js", that object's keys would need to be modified to match those specified in "ExtractProductData.js".
+
+
+2. Products beyond just simply books:
+
+  The app can navigate to any specified category on Amazon and create a list of all contained product links just by changing the "category" value in config.json.
+
+  Similar to domains beyond Amazon, "ExtractProductData.js" and potentially "Product.js" would need to be modified.
+
+  If requested data points are the same as those specified for books, then only the selectors for those data points would need to be modified in "ExtractProductData.js" and no changes would need to be made to "Product.js".  However if data points different, the object keys in both files would need to be updated to match.

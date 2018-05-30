@@ -19,6 +19,7 @@ describe("Amazon", function() {
       console.log(title)
       expect(title).to.equal('Amazon.com: books: Books')
       done();
-    });
+      nightmare.end();
+    })
   });
 });
